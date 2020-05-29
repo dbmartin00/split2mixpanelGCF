@@ -1,0 +1,1 @@
+This is a Google Cloud Function that acts as a Split impressions webhook:  parse the impressions to create MixPanel events, base64 encode them, and send them to the MixPanel events endpoint.  Available elsewhere as an AWS Lambda.
