@@ -1,6 +1,5 @@
 package io.split.dbm.integrations;
 
-import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -36,11 +35,16 @@ public class Split2MixPanel implements HttpFunction {
 		List<MixPanelEvent> events = new LinkedList<MixPanelEvent>();
         for(Impression impression : impressions) {
         	MixPanelEvent event = new MixPanelEvent();
-        	event.event = "split_evaluation";
+        	event.event = "$experiment_started";
         	event.properties = new HashMap<String, Object>();
+        	event.properties.put("Experiment name", impression.split);
+        	event.properties.put("Variant name", impression.treatment);
+        	event.properties.put("$source", "Split");
+
         	event.properties.put("split", impression.split);
         	event.properties.put("distinct_id", impression.key);
-        	event.properties.put("token", "9add192c319da91127787dfa1065dfa6");
+        	//event.properties.put("token", YOUR_MIXPANEL_TOKEN_HERE);
+        	event.properties.put("token", "224979a8fcc23c2624902681bf9c206e");
         	event.properties.put("time", impression.time / 1000);
         	event.properties.put("treatment", impression.treatment);
         	event.properties.put("label", impression.label);
@@ -49,6 +53,7 @@ public class Split2MixPanel implements HttpFunction {
         	event.properties.put("sdk", impression.sdk);
         	event.properties.put("sdkVersion", impression.sdkVersion);
         	event.properties.put("splitVersionNumber", impression.splitVersionNumber);
+        	
         	events.add(event);
         }
         String rawJson = new Gson().toJson(events);
