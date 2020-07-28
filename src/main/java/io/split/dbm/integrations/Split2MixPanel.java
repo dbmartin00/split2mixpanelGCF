@@ -43,8 +43,7 @@ public class Split2MixPanel implements HttpFunction {
 
         	event.properties.put("split", impression.split);
         	event.properties.put("distinct_id", impression.key);
-        	//event.properties.put("token", YOUR_MIXPANEL_TOKEN_HERE);
-        	event.properties.put("token", "224979a8fcc23c2624902681bf9c206e");
+        	event.properties.put("token", YOUR_MIXPANEL_TOKEN_HERE);
         	event.properties.put("time", impression.time / 1000);
         	event.properties.put("treatment", impression.treatment);
         	event.properties.put("label", impression.label);
